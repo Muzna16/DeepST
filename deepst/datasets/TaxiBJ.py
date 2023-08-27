@@ -4,21 +4,35 @@
         meteorologic data
 """
 from __future__ import print_function
-
 import os
 #import cPickle as pickle
 import pickle
 from copy import copy
 import numpy as np
 import h5py
-from . import load_stdata, stat
-from ..preprocessing import MinMaxNormalization, remove_incomplete_days, timestamp2vec
-from ..config import Config
-from .STMatrix import STMatrix
-# np.random.seed(1337)  # for reproducibility
+import importlib
 
-# parameters
-DATAPATH = Config().DATAPATH
+#importing modules from other files
+module_name = 'load_data'
+module = importlib.import_module(module_name)
+load_stdata = getattr(module, 'load_stdata')
+stat = getattr(module, 'stat')
+
+module_name = 'minmax_normalization'
+module = importlib.import_module(module_name)
+MinMaxNormalization = getattr(module, 'MinMaxNormalization')
+
+module_name = "test"
+module = importlib.import_module(module_name)
+remove_incomplete_days = getattr(module, 'remove_incomplete_days')
+timestamp2vec = getattr(module, 'timestamp2vec')
+
+module_name = 'config'
+module = importlib.import_module(module_name)
+config = getattr(module, 'Config')
+DATAPATH = config().DATAPATH
+
+
 
 
 def load_holiday(timeslots, fname=os.path.join(DATAPATH, 'TaxiBJ', 'BJ_Holiday.txt')):

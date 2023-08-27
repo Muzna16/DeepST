@@ -4,10 +4,10 @@ from __future__ import print_function
 import cPickle as pickle
 import numpy as np
 
-from ..preprocessing import MinMaxNormalization
-from ..preprocessing import remove_incomplete_days
+from .test import MinMaxNormalization
+from .test import remove_incomplete_days
 from ..datasets.STMatrix import STMatrix
-from ..preprocessing import timestamp2vec
+from .test import timestamp2vec
 from . import load_stdata
 # np.random.seed(1337)  # for reproducibility
 

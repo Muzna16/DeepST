@@ -13,7 +13,7 @@ from keras.optimizers import Adam
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 
 from deepst.models.STResNet import stresnet
-from deepst.config import Config
+from deepst.datasets.config import Config
 import deepst.metrics as metrics
 from deepst.datasets import TaxiBJ
 np.random.seed(1337)  # for reproducibility

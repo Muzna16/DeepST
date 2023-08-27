@@ -4,8 +4,8 @@ import pandas as pd
 import numpy as np
 
 from . import load_stdata
-from ..config import Config
-from ..utils import string2timestamp
+from .config import Config
+from .utils_in import string2timestamp
 
 
 class STMatrix(object):
