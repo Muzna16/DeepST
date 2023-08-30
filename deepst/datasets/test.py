@@ -2,11 +2,13 @@ import pandas as pd
 import numpy as np
 from copy import copy
 import time
+import datetime
 # from temporal_contrast_normalization import TemporalConstrastNormalization
 # from personal_temporal_contrast_normalization import PersonalTemporalConstrastNormalization
 # from .minmax_normalization import MinMaxNormalization
 # from .utils_in import string2timestamp
 import importlib
+import datetime
 
 
 module_name = 'minmax_normalization'
@@ -18,9 +20,11 @@ module = importlib.import_module(module_name)
 MinMaxNormalization = getattr(module, 'string2timestamp')
 
 def timestamp2vec(timestamps):
+    print(timestamps)
     # tm_wday range [0, 6], Monday is 0
     # vec = [time.strptime(str(t[:8], encoding='utf-8'), '%Y%m%d').tm_wday for t in timestamps]  # python3
-    vec = [time.strptime(t[:8], '%Y%m%d').tm_wday for t in timestamps]  # python2
+    #vec = [time.strptime(t[:8], '%Y%m%d').tm_wday for t in timestamps]  # python2
+    vec = [datetime.datetime.strptime(t[:8], '%Y%m%d').weekday() for t in timestamps]
     ret = []
     for i in vec:
         v = [0 for _ in range(7)]
@@ -31,6 +35,7 @@ def timestamp2vec(timestamps):
             v.append(1)  # weekday
         ret.append(v)
     return np.asarray(ret)
+
 
 
 def remove_incomplete_days(data, timestamps, T=48):

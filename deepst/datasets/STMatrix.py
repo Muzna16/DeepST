@@ -2,11 +2,25 @@ from __future__ import print_function
 import os
 import pandas as pd
 import numpy as np
+import importlib
 
-from . import load_stdata
-from .config import Config
-from .utils_in import string2timestamp
+# from .config import Config
+# from .utils_in import string2timestamp
 
+module_name = 'load_data'
+module = importlib.import_module(module_name)
+load_stdata = getattr(module, 'load_stdata')
+stat = getattr(module, 'stat')
+
+module_name = 'config'
+module = importlib.import_module(module_name)
+config = getattr(module, 'Config')
+DATAPATH = config().DATAPATH
+
+
+module_name = 'utils_in'
+module = importlib.import_module(module_name)
+string2timestamp = getattr(module, 'string2timestamp')
 
 class STMatrix(object):
     """docstring for STMatrix"""

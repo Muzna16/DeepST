@@ -59,7 +59,7 @@ def load_meteorol(timeslots, fname=os.path.join(DATAPATH, 'TaxiBJ', 'BJ_Meteorol
     Weather = f['Weather'].value
     Temperature = f['Temperature'].value
     f.close()
-
+    
     M = dict()  # map timeslot to index
     for i, slot in enumerate(Timeslot):
         M[slot] = i
@@ -203,4 +203,5 @@ def load_data(T=48, nb_flow=2, len_closeness=None, len_period=None, len_trend=No
     for _X in X_test:
         print(_X.shape, )
     print()
+   
     return X_train, Y_train, X_test, Y_test, mmn, metadata_dim, timestamp_train, timestamp_test

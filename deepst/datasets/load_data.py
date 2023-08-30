@@ -6,9 +6,15 @@ import time
 
 def load_stdata(fname):
         f = h5py.File(fname, 'r')
-        data = f['data'].value
-        timestamps = f['date'].value
-        f.close()
+        for key in f.keys():
+             
+            print(key, f[key].shape)    
+    # Assign datasets to variables
+            data = f['data'][:]  # Use slicing to access the data
+            timestamps = f['date'][:]
+        # data = f['data'][:]
+        # timestamps = f['date'][:]
+        # f.close()
         print("This is load data from load_data.py")
         return data, timestamps
 
